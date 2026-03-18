@@ -1,18 +1,20 @@
 resource "aws_instance" "example" {
-  ami = "ami-0220d79f3f480ecf5"
-  count = 5
+  count = 3
+  ami = var.ami_id
   vpc_security_group_ids = [aws_security_group.security-group1.id]
 
-  instance_type = "t3.micro"
+  instance_type = var.instance_type
   tags = {
-    Name = "terraform"
-    Project = "Roboshop"
+    
+        Name = var.instances[count.index]
+        Project = "Roboshop"
+        Terraform = true
   }
 
 }
 
 resource "aws_security_group" "security-group1" {
-  name        = "allow_tls"
+  name        = var.sg_name
   description = "Allow TLS inbound traffic and all outbound traffic"
 
   egress {

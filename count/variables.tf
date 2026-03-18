@@ -11,19 +11,15 @@ variable "instance_type" {
   
 }
 
-variable "ec2_tags" {
-    type = map
-    default = {
-
-        Name = var.instances[count.index]
-        Project = "Roboshop"
-        Terraform = true
-    }
-  
-}
 
 variable "sg_name" {
     type = string
     default = "allow_tls_terraform"
+  
+}
+
+variable "instances" {
+    type = list
+    default = ["mongodb", "catalogue", "frontend"]
   
 }
